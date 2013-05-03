@@ -8,7 +8,7 @@ __Admin Bar__ is a _GetSimple_ plug-in which adds a very simple administration b
 
 ### How to use it
 
-Just add `admin-bar.php` and the `admin-bar` folder to your _GetSimple_ installation's `plugins` directory.
+Just add `admin-bar.php` and the `admin-bar` folder to your _GetSimple_ installation's `plugins` directory. Make sure your theme calls `get_footer()`, as this is where the HTML for the bar is inserted.
 
 ### Features
 

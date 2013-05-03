@@ -19,7 +19,7 @@ register_plugin(
 	'ab_admin_bar_show'
 );
 
-add_action('content-bottom', 'ab_admin_bar');
+add_action('theme-footer', 'ab_admin_bar');
 
 register_style('admin-bar', $SITEURL.'plugins/admin-bar/admin-bar.css', GSVERSION, 'screen');
 
