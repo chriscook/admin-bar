@@ -3,91 +3,68 @@
 /*
 Plugin Name: Admin Bar
 Description: Adds a very simple administration bar to the front-end of the website
-Version: 0.1
+Version: 1.0
 Author: Chris Cook
 Author URI: http://chris-cook.co.uk
 */
 
-# get correct id for plugin
-$thisfile = basename(__FILE__, ".php");
-
-# register plugin
 register_plugin(
-	$thisfile,
+	basename(__FILE__, ".php"),
 	'Admin Bar',
 	'0.1',
 	'Chris Cook',
 	'http://chris-cook.co.uk',
-	'Adds a very simple administration bar to the front-end of the website'
+	'Adds a very simple administration bar to the front-end of the website',
+	'none',
+	'ab_admin_bar_show'
 );
 
-# activate filter
-add_action('content-bottom','ab_admin_bar');
+add_action('content-bottom', 'ab_admin_bar');
 
-# functions
+register_style('admin-bar', $SITEURL.'plugins/admin-bar/admin-bar.css', GSVERSION, 'screen');
+
+if (ab_is_admin()) {
+	queue_style('admin-bar', GSFRONT);
+}
+
+function ab_admin_bar() {
+	if (ab_is_admin()) {
+		GLOBAL $USR;
+		GLOBAL $SITEURL;
+		GLOBAL $url;
+		echo '<div id="admin-bar">';
+		echo '<ul class="left">';
+		echo '<li><a href="' . $SITEURL . 'admin/pages.php">Page manager</a></li>';
+		if (ab_news_manager_installed()) {
+			echo '<li><a href="' . $SITEURL . 'admin/load.php?id=news_manager">News manager</a></li>';
+		}
+		echo '<li><a href="' . $SITEURL . 'admin/upload.php">File manager</a></li>';
+		echo '<li>|</li>';
+		echo '<li><a href="' . $SITEURL . 'admin/edit.php">Add page</a></li>';
+		if (ab_news_manager_installed()) {
+			echo '<li><a href="' . $SITEURL . 'admin/load.php?id=news_manager&amp;edit">Add news post</a></li>';
+		}
+		echo '<li>|</li>';
+		echo '<li><a href="' . $SITEURL . 'admin/edit.php?id=' . $url . '">Edit this page</a></li>';
+		echo '</ul>';
+		echo '<ul class="right">';
+		echo '<li>Logged in as ' . $USR . '</li>';
+		echo '<li>|</li>';
+		echo '<li><a href="' . $SITEURL . 'admin">Control panel</a></li>';
+		echo '<li><a href="' . $SITEURL . 'admin/logout.php">Logout</a></li>';
+		echo '</ul>';
+		echo '</div>';
+	}
+}
+
 function ab_is_admin() {
 	GLOBAL $USR;
 	return (isset($USR) && $USR == get_cookie('GS_ADMIN_USERNAME'));
 }
 
-function ab_admin_bar() {
-	if (ab_is_admin()) {
-		echo "<style>
-			#admin-bar {
-				background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
-				left: 0;
-				padding: 0.25em 0;
-				position: fixed;
-				top: 0;
-				width: 100%;
-				z-index: 1000;
-			}
-
-			#admin-bar ul {
-				margin: 0;
-			}
-
-			#admin-bar .left {
-				float: left;
-			}
-
-			#admin-bar .right {
-				float: right;
-			}
-
-			#admin-bar li {
-				float: left;
-				list-style-type: none;
-				margin: 0 0.5em;
-			}
-
-			#admin-bar a {
-				color: #FEFEFE;
-				text-decoration: none;
-			}
-			</style>";
-		echo '<div id="admin-bar">';
-		echo '<ul class="left">';
-		echo '<li><a href="';
-		get_site_url();
-		echo 'admin/edit.php">Add page</a></li>';
-		echo '<li><a href="';
-		get_site_url();
-		echo 'admin/load.php?id=news_manager&amp;edit">Add news post</a></li>';
-		echo '<li><a href="';
-		get_site_url();
-		echo 'admin/edit.php?id=' . return_page_slug() . '">Edit this page</a></li>';
-		echo '</ul>';
-		echo '<ul class="right">';
-		echo '<li><a href="';
-		get_site_url();
-		echo 'admin">Control panel</a></li>';
-		echo '<li><a href="';
-		get_site_url();
-		echo 'admin/logout.php">Logout</a></li>';
-		echo '</ul>';
-		echo '</div>';
-	}
+function ab_news_manager_installed() {
+	GLOBAL $live_plugins;
+	return isset($live_plugins['news_manager.php']) && $live_plugins['news_manager.php'] == 'true';
 }
 
 ?>

@@ -1,0 +1,48 @@
+#admin-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	padding: 0.25em 0;
+	background: #010101;
+	opacity: 0.2;
+	-webkit-transition: opacity 0.2s ease;
+	   -moz-transition: opacity 0.2s ease;
+	    -ms-transition: opacity 0.2s ease;
+	     -o-transition: opacity 0.2s ease;
+	        transition: opacity 0.2s ease;
+}
+
+#admin-bar:hover {
+	opacity: 1;
+}
+
+#admin-bar ul {
+	margin: 0;
+	cursor: default;
+}
+
+#admin-bar .left {
+	float: left;
+}
+
+#admin-bar .right {
+	float: right;
+}
+
+#admin-bar li {
+	float: left;
+	margin: 0 0.5em;
+	list-style-type: none;
+	color: #FEFEFE;
+}
+
+#admin-bar a {
+	color: #FEFEFE;
+	text-decoration: none;
+}
+
+#admin-bar a:hover {
+	text-decoration: underline;
+}
