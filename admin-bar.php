@@ -11,7 +11,7 @@ Author URI: http://chris-cook.co.uk
 register_plugin(
 	basename(__FILE__, ".php"),
 	'Admin Bar',
-	'0.1',
+	'1.0',
 	'Chris Cook',
 	'http://chris-cook.co.uk',
 	'Adds a very simple administration bar to the front-end of the website',
