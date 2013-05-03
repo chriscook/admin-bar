@@ -12,7 +12,7 @@ Just add `admin-bar.php` and the `admin-bar` folder to your _GetSimple_ installa
 
 ### Features
 
-+ Shows links to the page and file managers, and links to add a new page or alter the current one. If the [__News Manager__](http://get-simple.info/extend/plugin/news-manager/43/) plug-in is intalled, links to the news manager and to add a new news post are also added.
++ Shows links to the page and file managers, and links to add a new page or alter the current one. If the [__News Manager__](http://get-simple.info/extend/plugin/news-manager/43/) plug-in is installed, links to the news manager and to add a new news post are also added.
 
 ### Author and Acknowledgements
 
